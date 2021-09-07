@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+<a class="navbar-brand" href="{% url 'home' %}"><img src="https://i.resmim.net/SfmgE.png" class="w-50"></a>
+  <a class="navbar-brand" href="{% url 'home' %}">Anasayfa</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon "></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+        {%  if  request.user.is_authenticated %}
+        <li class="nav-item active">
+            <li class="nav-item">
+          <a class="nav-link" href="{% url 'post:create' %}">Yazı Ekle</a>
+      </li>
+    </li>
+        {% endif %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'post:index' %}">Blog <span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'post:hakkimda' %}">Yazarlar</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'post:iletisim' %}">İletişim</a>
+      </li>
+    {% if not request.user.is_authenticated %}
+    <li class="nav-item">
+        <a class="nav-link" href="{%  url 'accounts:register'  %}">Üye Ol</a>
+      </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{%  url 'accounts:login'  %}">Giriş</a>
+      </li>
+        {% else %}
+          <a class="nav-link" href="{%  url 'accounts:logout'  %}">Çıkış</a>
+    {% endif %}
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Created by | YadeYazılım</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Ara" aria-label="Search" name="q" value="{{ request.GET.q }}">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Ara</button>
+    </form>
+
+  </div>
+</nav>

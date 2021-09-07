@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}{{ block.super }}{% endblock %}
+  {% block body %}
+
+
+      <!DOCTYPE HTML>
+      <html>
+<head>
+<style>
+#perde {
+display: none;
+position: fixed;
+top: 0px;
+left: 0px;
+width: 100%;
+height: 100%;
+background-color: black;
+opacity: 0.8;
+filter: alpha(opacity=80);
+z-index: 100;
+    background-image: url("https://i.imgyukle.com/2021/03/24/Nbr8ON.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.ac-kapa {
+position: relative;
+background-color: black;
+z-index: 101;
+padding:2px;
+color:white;
+text-align:center;
+text-decoration:none;
+}
+html {
+    background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgNJ_lldP_OGo5uFYhPRO5CnnqyLvXd1qwCA&usqp=CAU") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+</style>
+</head>
+<body>
+<div id="perde"></div>
+
+<a href="#" class="ac-kapa" onclick="toggle();">Light</a>
+<script>
+function toggle () {
+var perde = document.getElementById("perde");
+if (perde.style.display != "block")
+perde.style.display = "block";
+else
+perde.style.display = "none";
+}
+</script>
+</body>
+</html>
+  {% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+    <div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form method="post" enctype="multipart/form-data">{# get güvenli olmadığı için post ile değiştirdik metodu #}
+    {% csrf_token %}{# güvenlik açığını önlemek için yaptık #}
+<h1>Form</h1>
+{{ form|crispy }}
+{{ form.media }}
+    <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Gönder">
+    </form>
+        </div>
+    </div>
+    </div>
+    <style>
+.container{
+    text-align: center;
+    max-width: 5000px;
+}
+    </style>
+{% endblock %}

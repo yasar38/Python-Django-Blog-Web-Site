@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<style>
+html {
+    background-color: #4C1A1D;
+}
+.container{
+    background-color: #4C1A1D;
+    text-align: center;
+    max-width: 5000px;
+}
+</style>
+
+{# post/{{ post.id }} #} {# {% url 'detail' id=post.id %} #}
+    <div class="container ">
+{% for post in posts %}
+
+    <div class="card">
+ {#  <img class="card-img-top" src="..." alt="Card image cap">  #}
+  <div class="card-body btn-dark">
+      <div class="col-md-6 offset-md-3">
+          {% if post.image %}
+          <img src="{{ post.image.url }}" class="img-fluid">
+          {% endif %}
+
+    <h3>{{ post.title }}<h5><small>{{ post.publishing_date|timesince }} önce</small></h5></h3>
+    <h4>Yazar: {{ post.user.get_full_name }}</h4>
+    <p class="card-text">{{ post.content|safe|linebreaks|truncatechars:150}}</p>
+    <a href="{{ post.get_absolute_url }}" class="btn btn-info">İncele</a>
+      {%  if  request.user.is_authenticated %}
+          <a href="{{ post.get_update_url }}" class="btn btn-success">Güncelle</a>
+          <a href="{{ post.get_delete_url }}" class="btn btn-danger">Sil</a>
+      {% endif %}
+  </div>
+</div>
+</div>
+{% endfor %}
+<div class="card-body">
+      <div class="col-md-6 offset-md-3">
+    <div class="pagination">
+    <span class="step-links">
+        {% if posts.has_previous %}
+            <a class="btn btn-outline-success"href="?sayfa={{ posts.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Önceki Sayfa</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+        </span>
+
+        {% if posts.has_next %}
+            <a class="btn btn-outline-success"href="?sayfa={{ posts.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Sonraki Sayfa</a>
+        {% endif %}
+    </span>
+</div>
+      </div>
+</div>
+</div>
+
+{% endblock %}
